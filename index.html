@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="FF Control Demo — standalone settings simulator">
+  <title>FF Control Demo</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="status-bar" aria-label="Status bar">
+      <span class="clock-pill" id="clock">9:41</span>
+      <span class="brand-pill"><span aria-hidden="true">➤</span> FF CONTROL</span>
+      <span class="status-icons" aria-label="Demo status">▂ ▅ ▇ <span>5G</span> <b>79</b></span>
+    </header>
+
+    <nav class="tabs" aria-label="Main navigation" role="tablist">
+      <button class="tab active" id="menuTab" role="tab" aria-selected="true" aria-controls="menuView">Menu</button>
+      <button class="tab" id="logTab" role="tab" aria-selected="false" aria-controls="logView">Log <span id="logCount" class="count" hidden>0</span></button>
+    </nav>
+
+    <section id="menuView" role="tabpanel" aria-labelledby="menuTab">
+      <div class="panel settings-panel">
+        <div class="range-row">
+          <div class="range-heading"><label for="fov">FOV</label><output id="fovValue" for="fov">70%</output></div>
+          <input id="fov" type="range" min="1" max="100" value="70">
+        </div>
+        <div class="range-row">
+          <div class="range-heading"><label for="headshot">Headshot</label><output id="headshotValue" for="headshot">52%</output></div>
+          <input id="headshot" type="range" min="1" max="100" value="52">
+        </div>
+        <div id="aimOptions"></div>
+      </div>
+
+      <h2 class="section-label">ESP</h2>
+      <div class="panel" id="espOptions"></div>
+      <h2 class="section-label">ANTI-CHEAT STATUS</h2>
+      <section class="panel security-panel" aria-labelledby="securityTitle">
+        <div class="security-head">
+          <div class="security-mark" aria-hidden="true">✓</div>
+          <div class="security-copy"><h2 id="securityTitle">Demo Safety Monitor</h2><p id="securityState">LOCAL-ONLY · NO GAME CONNECTION</p></div>
+          <span class="status-chip" id="securityChip">SAFE MODE</span>
+        </div>
+        <div class="security-check"><span class="check-dot"></span><span><b>App integrity</b><small id="integrityText">Local settings loaded</small></span><strong id="integrityResult">OK</strong></div>
+        <div class="security-check"><span class="check-dot"></span><span><b>Game connection</b><small>External game access is not used</small></span><strong>NONE</strong></div>
+        <div class="security-note">This monitor checks this demo only. It cannot detect, bypass, or prevent game anti-cheat bans.</div>
+        <button id="safeModeButton" class="safe-mode-button" type="button">Enable Safe Mode</button>
+      </section>
+      <p class="disclaimer">Standalone simulator. Settings affect this demo only; no game connection or injection.</p>
+    </section>
+
+    <section id="logView" class="panel log-panel" role="tabpanel" aria-labelledby="logTab" hidden>
+      <div class="log-header">
+        <div><h1>Activity Log</h1><p>Actions performed in this session</p></div>
+        <button id="clearLogs" class="text-button" type="button">Clear</button>
+      </div>
+      <div id="logEntries" aria-live="polite"></div>
+      <div id="emptyLogs" class="empty-state">
+        <div class="empty-icon" aria-hidden="true">≡</div>
+        <h2>No activity yet</h2>
+        <p>Adjust a setting or start the demo to see events here.</p>
+      </div>
+    </section>
+
+    <footer class="bottom-bar">
+      <button id="startButton" class="start-button" type="button"><span id="startIcon" aria-hidden="true">▶</span><span id="startText">Start Demo</span></button>
+      <button id="resetButton" class="reset-button" type="button" aria-label="Reset settings" title="Reset settings">↶</button>
+    </footer>
+    <div class="home-indicator" aria-hidden="true"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>
